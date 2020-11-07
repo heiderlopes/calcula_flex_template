@@ -2,12 +2,14 @@ package br.com.calculaflex.domain.usecases
 
 import br.com.calculaflex.domain.entity.RequestState
 import br.com.calculaflex.domain.entity.User
+import br.com.calculaflex.domain.entity.UserLogin
 import br.com.calculaflex.domain.repository.UserRepository
 
-class GetUserLoggedUseCase(
+class LoginUseCase(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun getUserLogged(): RequestState<User> = userRepository.getUserLogged()
+    suspend fun doLogin(userLogin: UserLogin): RequestState<User> =
+        userRepository.doLogin(userLogin)
 
 }
