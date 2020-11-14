@@ -15,7 +15,11 @@
         android:id="@+id/betterFuelFragment"
         android:name="br.com.calculaflex.presentation.betterfuel.BetterFuelFragment"
         android:label="BetterFuelFragment"
-        tools:layout="@layout/fragment_better_fuel" />
+        tools:layout="@layout/fragment_better_fuel">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://www.calculaflex.com.br/betterfuel" />
+    </fragment>
     <include app:graph="@navigation/login_graph" />
     <fragment
         android:id="@+id/profileFragment"

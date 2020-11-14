@@ -15,6 +15,7 @@ import br.com.calculaflex.domain.entity.RequestState
 import br.com.calculaflex.domain.usecases.GetUserLoggedUseCase
 import br.com.calculaflex.presentation.base.BaseFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 val NAVIGATION_KEY = "NAV_KEY"
@@ -25,9 +26,10 @@ abstract class BaseAuthFragment : BaseFragment() {
     private val baseAuthViewModel: BaseAuthViewModel by lazy {
         ViewModelProvider(
             this,
-            BaseViewModelFactory(GetUserLoggedUseCase(UserRepositoryImpl(
+            BaseAuthViewModelFactory(GetUserLoggedUseCase(UserRepositoryImpl(
                 UserRemoteFirebaseDataSourceImpl(
-                    FirebaseAuth.getInstance()
+                    FirebaseAuth.getInstance(),
+                    FirebaseFirestore.getInstance()
                 ))))
         ).get(BaseAuthViewModel::class.java)
     }
