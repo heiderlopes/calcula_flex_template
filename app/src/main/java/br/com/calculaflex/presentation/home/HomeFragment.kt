@@ -43,6 +43,7 @@ class HomeFragment : BaseAuthFragment() {
     private lateinit var rvHomeDashboard: RecyclerView
 
 
+    
     private val homeViewModel: HomeViewModel by lazy {
         ViewModelProvider(
             this,
