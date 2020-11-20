@@ -38,6 +38,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 class HomeFragment : BaseAuthFragment() {
 
+    //Teste
     override val layout = R.layout.fragment_home
 
     private lateinit var rvHomeDashboard: RecyclerView
