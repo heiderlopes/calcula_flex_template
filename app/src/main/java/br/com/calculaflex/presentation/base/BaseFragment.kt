@@ -17,17 +17,10 @@ import androidx.navigation.fragment.findNavController
 import br.com.calculaflex.BuildConfig
 import br.com.calculaflex.R
 import br.com.calculaflex.data.remote.datasource.AppRemoteFirebaseDataSourceImpl
-import br.com.calculaflex.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
 import br.com.calculaflex.data.repository.AppRepositoryImpl
-import br.com.calculaflex.data.repository.UserRepositoryImpl
 import br.com.calculaflex.domain.entity.RequestState
 import br.com.calculaflex.domain.usecases.GetMinAppVersionUseCase
-import br.com.calculaflex.domain.usecases.GetUserLoggedUseCase
-import br.com.calculaflex.presentation.base.auth.BaseAuthViewModel
-import br.com.calculaflex.presentation.base.auth.BaseAuthViewModelFactory
 import br.com.calculaflex.presentation.base.auth.NAVIGATION_KEY
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -37,6 +30,7 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var loadingView: View
 
+    private lateinit var flavourView: View
 
     private val baseViewModel: BaseViewModel by lazy {
         ViewModelProvider(
@@ -63,11 +57,39 @@ abstract class BaseFragment : Fragment() {
 
         loadingView = inflater.inflate(R.layout.include_loading, container, false)
 
+        val flavourScreen = inflater.inflate(R.layout.include_flavour, container, false)
+        flavourView = flavourScreen.findViewById(R.id.flavourScreen)
+
+        configureEnvironment(
+            flavourView,
+            flavourScreen.findViewById(R.id.tvEnvironment) as TextView
+        )
+
         screenRootView.addView(screenView)
         screenRootView.addView(loadingView)
+        screenRootView.addView(flavourView)
 
         registerObserver()
         return screenRootView
+    }
+
+    private fun configureEnvironment(container: View, tvEnvironment: TextView) {
+
+        when (BuildConfig.FLAVOR) {
+            "dev" -> {
+                container.visibility = View.VISIBLE
+                tvEnvironment.text = "Desenvolvimento"
+            }
+            "qa" -> {
+                container.visibility = View.VISIBLE
+                tvEnvironment.text = "Homologação"
+            }
+            "main" -> {
+                container.visibility = View.GONE
+                tvEnvironment.text = ""
+            }
+        }
+
     }
 
     private fun registerObserver() {

@@ -2,6 +2,7 @@ package br.com.calculaflex.data.remote.datasource
 
 import br.com.calculaflex.domain.entity.Car
 import br.com.calculaflex.domain.entity.RequestState
+import br.com.calculaflex.domain.entity.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
@@ -17,6 +18,21 @@ class CarRemoteDataSourceImpl(
                 .set(car)
                 .await()
             RequestState.Success(car)
+        } catch (e: Exception) {
+            RequestState.Error(e)
+        }
+    }
+
+    override suspend fun findBy(id: String): RequestState<Car> {
+        return try {
+
+            val car = firebaseFirestore.collection("cars")
+                .document(id)
+                .get()
+                .await().toObject(Car::class.java) ?: Car()
+
+            RequestState.Success(car)
+
         } catch (e: Exception) {
             RequestState.Error(e)
         }

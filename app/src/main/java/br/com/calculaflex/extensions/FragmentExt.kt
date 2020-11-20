@@ -9,6 +9,7 @@ fun Fragment.startDeeplink(deeplink: String) {
     if (deeplink.contains("://")) {
         val uri = Uri.parse(deeplink)
         val responseIntent = Intent(Intent.ACTION_VIEW, uri)
+        responseIntent.putExtra("id", "1234")
         startActivity(responseIntent)
     } else {
         val internalIntent = Intent(deeplink)

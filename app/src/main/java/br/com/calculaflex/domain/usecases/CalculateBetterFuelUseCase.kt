@@ -2,23 +2,30 @@ package br.com.calculaflex.domain.usecases
 
 import br.com.calculaflex.domain.entity.RequestState
 import br.com.calculaflex.domain.entity.enums.FuelType
+import br.com.calculaflex.domain.entity.holder.BetterFuelHolder
+import br.com.calculaflex.domain.utils.FuelCalculator
 
-class CalculateBetterFuelUseCase {
+class CalculateBetterFuelUseCase(
+    private val fuelCalculator: FuelCalculator
+) {
 
     suspend fun calculate(
-        ethanolAverage: Double,
-        gasAverage: Double,
-        ethanolPrice: Double,
-        gasPrice: Double
+        params: Params
     ): RequestState<FuelType> {
 
-        val performanceOfMyCar = ethanolAverage / gasAverage
-        val priceOfFuelIndice = ethanolPrice / gasPrice
+        return try {
 
-        return if (priceOfFuelIndice <= performanceOfMyCar) {
-            RequestState.Success(FuelType.ETHANOL)
-        } else {
-            RequestState.Success(FuelType.GASOLINE)
+            val betterFuel = fuelCalculator.betterFuel(
+                params.betterFuelHolder
+            )
+
+            RequestState.Success(betterFuel)
+        } catch (ex: Exception) {
+            RequestState.Error(ex)
         }
     }
+
+    data class Params(
+        val betterFuelHolder: BetterFuelHolder
+    )
 }
