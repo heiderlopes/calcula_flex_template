@@ -57,6 +57,7 @@ android {
             buildConfigField 'String', 'CHAVE', '"VALOR"'
         }
 
+        
         prd {
             buildConfigField 'String', 'CHAVE', '"VALOR"'
         }
