@@ -41,7 +41,7 @@ class HomeFragment : BaseAuthFragment() {
     override val layout = R.layout.fragment_home
 
     private lateinit var rvHomeDashboard: RecyclerView
-    
+
 
     private val homeViewModel: HomeViewModel by lazy {
         ViewModelProvider(

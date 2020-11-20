@@ -44,23 +44,23 @@ android {
         }
     }
 
-    flavorDimensions "app"
-
-    productFlavors {
-        dev {
-            applicationIdSuffix ".dev"
-            buildConfigField 'String', 'CHAVE', '"VALOR"'
-        }
-
-        hml {
-            applicationIdSuffix ".hml"
-            buildConfigField 'String', 'CHAVE', '"VALOR"'
-        }
-
-        prd {
-            buildConfigField 'String', 'CHAVE', '"VALOR"'
-        }
-    }
+//    flavorDimensions "app"
+//
+//    productFlavors {
+//        dev {
+//            applicationIdSuffix ".dev"
+//            buildConfigField 'String', 'CHAVE', '"VALOR"'
+//        }
+//
+//        hml {
+//            applicationIdSuffix ".hml"
+//            buildConfigField 'String', 'CHAVE', '"VALOR"'
+//        }
+//
+//        prd {
+//            buildConfigField 'String', 'CHAVE', '"VALOR"'
+//        }
+//    }
 
 }
 
