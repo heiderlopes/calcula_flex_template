@@ -52,6 +52,7 @@ android {
             buildConfigField 'String', 'CHAVE', '"VALOR"'
         }
 
+        
         hml {
             applicationIdSuffix ".hml"
             buildConfigField 'String', 'CHAVE', '"VALOR"'
