@@ -51,12 +51,13 @@ android {
             applicationIdSuffix ".dev"
             buildConfigField 'String', 'CHAVE', '"VALOR"'
         }
-        
+
         hml {
             applicationIdSuffix ".hml"
             buildConfigField 'String', 'CHAVE', '"VALOR"'
         }
 
+        
         prd {
             buildConfigField 'String', 'CHAVE', '"VALOR"'
         }
