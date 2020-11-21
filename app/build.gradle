@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -8,13 +10,21 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "br.com.calculaflex"
+        applicationId "br.com.calculaflex.hitg"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res/betterfuel',
+                    'src/main/res',
+            ]
+        }
     }
 
     buildTypes {
@@ -30,6 +40,24 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        dev {
+            applicationIdSuffix ".dev"
+            buildConfigField 'String', 'CHAVE', '"VALOR"'
+        }
+
+        hml {
+            applicationIdSuffix ".hml"
+            buildConfigField 'String', 'CHAVE', '"VALOR"'
+        }
+
+        prd {
+            buildConfigField 'String', 'CHAVE', '"VALOR"'
+        }
+    }
 }
 
 dependencies {
@@ -39,11 +67,45 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-config-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation 'com.airbnb.android:lottie:3.4.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // Dependências do coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7'
+
+    // Dependências com viewmodel e livedata
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+
+    // Dependências do navigation e extensões do fragment
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.1"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.1"
+
+    implementation 'br.com.concrete:canarinho:2.0.1'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //implementation 'com.github.helton-isac:CalculaFlexLib:1.0.0'
+    implementation 'com.github.heiderlopes:20MOB-CalculaFlexLib:1.0.1'
 
 }
