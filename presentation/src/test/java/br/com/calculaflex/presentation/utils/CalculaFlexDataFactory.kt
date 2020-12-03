@@ -3,6 +3,7 @@ package br.com.calculaflex.presentation.utils
 import br.com.calculaflex.domain.entity.DashboardAction
 import br.com.calculaflex.domain.entity.DashboardItem
 import br.com.calculaflex.domain.entity.DashboardMenu
+import br.com.calculaflex.domain.entity.NewUser
 import br.com.calculaflex.domain.entity.User
 import br.com.calculaflex.domain.entity.enums.FeatureToggleState
 
@@ -14,6 +15,14 @@ object CalculaFlexDataFactory {
             name = "Heider",
             email = "heider@fiap.com",
             phone = "11912345678"
+        )
+
+    fun createNewUser() =
+        NewUser(
+            name = "Heider",
+            email = "heider@fiap.com",
+            phone = "11912345678",
+            password = "password"
         )
 
     fun getDashboardMenu() =
